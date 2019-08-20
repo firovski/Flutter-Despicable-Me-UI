@@ -60,7 +60,8 @@ class _CharacterListingScreenState extends State<CharacterListingScreen> {
                 physics: ClampingScrollPhysics(),
                 controller: _pageController,
                 children: <Widget>[
-                  for (var i = 0; i < characters.length; i++)
+                  for (var i = 0; i <
+                      characters.length; i++) // ignore: sdk_version_ui_as_code,
                     CharacterWidget(character: characters[i],
                         pageController: _pageController,
                         currentPage: i)
@@ -72,4 +73,6 @@ class _CharacterListingScreenState extends State<CharacterListingScreen> {
       ),
     );
   }
+
+
 }
