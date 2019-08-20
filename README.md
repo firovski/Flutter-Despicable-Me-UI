@@ -5,8 +5,8 @@ This project is a design mock up for movie application based on :
 [**Design: Despicable Me Characters**](https://dribbble.com/shots/6403829-Movie-Character-UI-Animation)
 
 Special thanks for [TechieBlossom](https://github.com/TechieBlossom) for this awesome tutorial:
-* [**Part 1-**](https://youtu.be/-5DTrcXxGs8)
-* [**Part 2-**](https://youtu.be/2cl70GbiJZc)
+* [**Part 1**](https://youtu.be/-5DTrcXxGs8)
+* [**Part 2**](https://youtu.be/2cl70GbiJZc)
 
 
 
