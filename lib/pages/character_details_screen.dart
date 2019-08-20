@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:after_layout/after_layout.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_despicable_me_ui/models/character.dart';
@@ -46,7 +48,7 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(height: 40),
+                Platform.isIOS ? SizedBox(height: 40) : SizedBox(height: 10),
                 Padding(
                   padding: const EdgeInsets.only(top: 8.0, left: 16),
                   child: IconButton(
@@ -123,7 +125,7 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen>
                     child: Container(
                       alignment: Alignment.centerLeft,
                       padding: const EdgeInsets.symmetric(horizontal: 32),
-                      height: 80,
+                      height: 60,
                       child: Text(
                         "Clips (${widget.character.catalogPath.length})",
                         style: AppTheme.subHeading.copyWith(
@@ -189,13 +191,13 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen>
     } else {
       for (var i = 0; i < strings.length / 2; i++) {
         list.add(Column(
-            children: <Widget>[
-              roundedContainer(
-                  Colors.redAccent, widget.character.catalogPath[i]),
-              SizedBox(height: 20),
-              roundedContainer(
-                  Colors.greenAccent, widget.character.catalogPath[i + 1]),
-            ],
+          children: <Widget>[
+            roundedContainer(
+                Colors.redAccent, widget.character.catalogPath[i]),
+            SizedBox(height: 20),
+            roundedContainer(
+                Colors.greenAccent, widget.character.catalogPath[i + 1]),
+          ],
         ));
         list.add(new SizedBox(
             width: 40
@@ -205,24 +207,29 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen>
       }
     }
     return Row(children: list);
-
   }
 
 
   Widget roundedContainer(Color color, String url) {
-    return Material(
-      color: Colors.transparent,
-      elevation: 20,
-      child: Container(
-          width: 150,
-          height: 100,
-          decoration: BoxDecoration(
-            color: color,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-          ),
-          child: ClipRRect(
-              borderRadius: new BorderRadius.circular(8.0),
-              child: new Image.asset(url, fit: BoxFit.cover, height: 100))
+    return GestureDetector(
+      onTap: () {
+        _showDialog(url);
+      },
+      child: Material(
+        color: Colors.transparent,
+        elevation: 20,
+        child: Container(
+            width: 150,
+            height: 100,
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
+            child: ClipRRect(
+                borderRadius: new BorderRadius.circular(8.0),
+                child:
+                new Image.asset(url, fit: BoxFit.cover, height: 100))
+        ),
       ),
     );
   }
@@ -244,5 +251,27 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen>
         _bottomSheetBottomPosition = widget._collapsedBottomSheetBottomPosition;
       });
     });
+  }
+
+  void _showDialog(String url) {
+    // flutter defined function
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return AlertDialog(
+          actions: <Widget>[
+            // usually buttons at the bottom of the dialog
+
+            new Image.asset(url, fit: BoxFit.fitWidth, width: (MediaQuery
+                .of(context)
+                .size
+                .width / 3) * 2.2, alignment: Alignment.center,
+            ),
+
+          ],
+        );
+      },
+    );
   }
 }

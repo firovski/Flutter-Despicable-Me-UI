@@ -67,7 +67,8 @@ class _CharacterListingScreenState extends State<CharacterListingScreen> {
                         currentPage: i)
                 ],
               ),
-            )
+            ),
+            SizedBox(height: 40,)
           ],
         ),
       ),
